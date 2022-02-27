@@ -1,0 +1,12 @@
+
+a = {
+  foo = 42
+}.
+
+b = {
+  parent ^= a
+}.
+
+b foo printLn
+
+

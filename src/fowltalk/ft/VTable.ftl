@@ -1,0 +1,8 @@
+
+{
+  
+  updateInstance: object addSlot: name [
+    
+  ]
+
+}

@@ -1,0 +1,45 @@
+
+loadingInProgress := {}.
+
+{
+  namespace* := {}.
+
+  libraryPath := nil.
+
+  unknownMessage: msg [
+    selector := msg selector.
+    namespace: (namespace __Object_copyAddingSlot: selector value: loadingInProgress).
+
+    obj := self loadModule: selector.
+
+    namespace __Object_setSlot: selector value: obj.
+
+    obj
+
+  ].
+
+  loadModule: moduleName [
+    fullPath := modulePath: moduleName.
+
+    fullPath __String_printBoofoo
+  ].
+
+  finishLoading: moduleName [
+    fileContents := fullPath __String_readFile.
+    anonymousMethod := fileContents __String_compileAnonymousMethod.
+
+    result := anonymousMethod __VM_activateMethodContext.
+
+    (result __Object_respondsTo: 'loadPlatform:')
+      ifTrue: [
+        result loadPlatform: self
+      ]
+      else: [
+        result
+      ]
+  ].
+
+  modulePath: moduleName [
+    ((libraryPath __String_concat: '/') __String_concat: moduleName) __String_concat: '.ftl'
+  ]
+}
