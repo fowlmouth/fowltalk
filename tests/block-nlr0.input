@@ -1,0 +1,9 @@
+obj = {
+  someMethod [
+    block = [ ^1 ].
+    block value.
+    2
+  ]
+}.
+
+obj someMethod __Integer_print

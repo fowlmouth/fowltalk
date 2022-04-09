@@ -1,0 +1,8 @@
+unknownMessagePrinter = {
+  
+  unknownMessage: selector withArguments: arguments [
+    selector __String_printLn
+  ]
+}.
+
+unknownMessagePrinter cowabunga

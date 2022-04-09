@@ -1,0 +1,7 @@
+obj = {
+  foo: arg [
+    arg __Integer_printLn
+  ]
+}.
+
+obj foo: 42.

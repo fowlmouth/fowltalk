@@ -1,0 +1,6 @@
+libraryPath = '/foo'.
+moduleName = 'Bar'.
+
+resultingPath = ((libraryPath __String_concat: '/') __String_concat: moduleName) __String_concat: '.ftl'.
+
+resultingPath __String_printLn.

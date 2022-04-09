@@ -1,0 +1,10 @@
+point = {
+  x = 3.
+  y = 4.
+
+  addValues [
+    x __Integer_add: y
+  ]
+}.
+
+point addValues __Integer_printLn.

@@ -1,0 +1,9 @@
+a = {
+  x = 1
+}.
+
+b = {
+  parent* = a
+}.
+
+b x __Integer_print

@@ -1,0 +1,5 @@
+block1 = [|n|
+  n
+].
+
+(block1 value: 2) __Integer_print

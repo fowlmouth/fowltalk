@@ -1,0 +1,9 @@
+obj = {
+  returnsABadBlock [
+    [ ^1 ]
+  ]
+}.
+
+myBlock = obj returnsABadBlock.
+
+myBlock value

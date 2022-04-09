@@ -1,0 +1,9 @@
+builder = {
+  libraryPath = '/foo'.
+  
+  moduleName: module [
+    ((libraryPath __String_concat: '/') __String_concat: module) __String_concat: '.ftl'
+  ]
+}.
+
+(builder moduleName: 'Bar') __String_printLn.

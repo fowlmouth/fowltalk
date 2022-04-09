@@ -1,0 +1,17 @@
+a = {
+  x = 1
+}.
+
+b = {
+  x = 2
+}.
+
+c = {
+  dynamicParent* := a
+}.
+
+c x __Integer_printLn.
+
+c dynamicParent: b.
+
+c x __Integer_printLn.

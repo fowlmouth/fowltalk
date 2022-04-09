@@ -1,0 +1,13 @@
+obj = {
+  arg1: a arg2: b [
+    (a __Integer_add: b) __Integer_printLn
+  ].
+
+  value1 = 3.
+  value2 = 4.
+}.
+
+obj
+  arg1: obj value1
+  arg2:
+    obj value2

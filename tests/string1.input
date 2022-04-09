@@ -1,0 +1,1 @@
+('foo' __String_concat: 'bar') __String_printLn
