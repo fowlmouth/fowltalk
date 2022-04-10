@@ -15,7 +15,7 @@
 
 
 
-
+ 
 
 
 int ft_parser_lexer_next_character(struct ft_parser_lexer* lex);
