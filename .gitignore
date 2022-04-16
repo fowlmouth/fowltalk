@@ -1,3 +1,7 @@
 *.dSYM
 .DS_Store
+*.o
 *.dSYM
+*.so
+*.dylib
+bin/*
