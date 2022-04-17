@@ -80,8 +80,11 @@ ifeq ($(OS),Darwin)
 	install_name_tool -change $(VM_PATH) @executable_path/$(VM_NAME) $(VM_TEST_PATH)
 endif
 
-clean:
-	rm -f $(VM_OBJS) $(VM_PATH) $(VM_TEST_OBJS) $(VM_TEST_PATH) $(CLI_OBJS) $(CLI_PATH) $(LINENOISE_OBJ)
+clean: cleanobjs
+	rm -f $(VM_PATH) $(VM_TEST_PATH) $(CLI_PATH)
+
+cleanobjs:
+	rm -f $(VM_OBJS) $(VM_TEST_OBJS) $(CLI_OBJS) $(LINENOISE_OBJ)
 
 cleandeps:
 	rm -rf deps

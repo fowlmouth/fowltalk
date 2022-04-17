@@ -9,4 +9,4 @@ ADD ./include ./include
 ADD ./tests ./tests
 ADD Makefile run-tests.sh ./
 
-RUN make -j"$(nproc)"
+RUN make -j"$(nproc)" && make cleanobjs
