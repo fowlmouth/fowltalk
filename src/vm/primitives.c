@@ -88,7 +88,7 @@ PRIM(__Object_addStaticSlot_value_)
     return;
   }
   int vt_capacity = ft_vtable_slot_capacity(vtable);
-  struct ft_vtable_slot_desc new_slots[vt_capacity+2];
+  struct ft_vtable_slot_desc *new_slots = calloc(sizeof(struct ft_vtable_slot_desc), vt_capacity+2);
   int slot_count = ft_vtable_decompose_slots(vtable, vt_capacity+2, new_slots);
   ft_vtable_slot_desc_init(new_slots + slot_count++,
     ftvs_static_slot, selector, argv[2]);
@@ -100,6 +100,7 @@ PRIM(__Object_addStaticSlot_value_)
     ft_object_vtable(vtable), slot_count, new_slots, ft_vtable_base_size(vtable));
   ft_set_vtable(argv[0], new_vtable);
   ft_vm_push(vm, argv[0]);
+  free(new_slots);
 }
 PRIM(__Object_setSlot_)
 {

@@ -419,9 +419,9 @@ struct ft_vtable* ft_new_vtable(struct ft_allocator* allocator, struct ft_vtable
   vt->static_parents_begin = vtable_with_slots_size / sizeof(oop);
   memset(vt->slots, 0, sizeof(struct ft_vtable_slot) * vt_capacity);// vtable_with_slots_size - sizeof(struct ft_vtable_slot));
 
-  struct vt_tmp_data_slot data_slots[slot_count];
+  struct vt_tmp_data_slot* data_slots = calloc(sizeof(struct vt_tmp_data_slot), slot_count);
   struct vt_tmp_data_slot* data_slot_ptr = data_slots;
-  struct vt_tmp_setter_slot setter_slots[slot_count];
+  struct vt_tmp_setter_slot* setter_slots = calloc(sizeof(struct vt_tmp_setter_slot), slot_count);
   struct vt_tmp_setter_slot* setter_slot_ptr = setter_slots;
 
   int static_parent_counter = 0;
@@ -496,6 +496,9 @@ struct ft_vtable* ft_new_vtable(struct ft_allocator* allocator, struct ft_vtable
   next_setter:
     (void)0;
   }
+
+  free(data_slots);
+  free(setter_slots);
 
   assert(vt->instance_size == vt->slots_begin + vt->slots_count);
 

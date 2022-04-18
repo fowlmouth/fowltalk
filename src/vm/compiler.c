@@ -282,7 +282,8 @@ void ftc_accept_block(int argc, const char** argv, void* arg)
   struct ft_bytecode_builder* method_builder = c->context--;
   oop method = ft_bb_create_method(method_builder, c->env, c->options->vtable_vt);
 
-  char selector_buffer[ 1 + (argc ? argc : 1) * 6 ];
+  char *selector_buffer = calloc(1 + (argc ? argc : 1) * 6, 1);
+  // TODO check for null selector_buffer
   if(argc)
   {
     char* selector_end = selector_buffer;
@@ -298,6 +299,7 @@ void ftc_accept_block(int argc, const char** argv, void* arg)
     memcpy(selector_buffer, "value", 5);
   }
   struct ft_string* value_selector = ft_environment_intern(c->env, selector_buffer);
+  free(selector_buffer);
 
   // create a vtable for the block
   struct ft_vtable_slot_desc block_slots[2];

@@ -29,7 +29,7 @@ else
 	CFLAGS += -DNDEBUG -O1 -Wno-switch
 endif
 
-CFLAGS += -Iinclude/
+CFLAGS += -Iinclude/ -Werror=vla
 
 TEST_CFLAGS := $(CFLAGS) -Ideps/libtest/include
 
