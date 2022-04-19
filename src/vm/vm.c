@@ -556,7 +556,7 @@ enum ft_vm_run_result ft_vm_run(struct ft_virtual_machine* vm, struct ft_environ
       // arg >>= send_argc_bits; // arg is now the index of the selector in literals
       selector = (struct ft_string*)ft_vm_pop(vm, 1);
       ft_debug("self send argc= %lu selector= '%s'", arg, ft_string_bytes(selector));
-      oop argv[arg+1];
+      oop argv[32];
       argv[0] = vm->frame->method;
       ft_vm_pop_into(vm, arg, argv+1);
       ft_vm_send(vm, env, selector, arg+1, argv);

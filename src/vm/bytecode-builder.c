@@ -97,7 +97,7 @@ void ft_bb_debug(struct ft_bytecode_builder* bb)
 void ft_bb_write_instruction(struct ft_bytecode_builder* bb, struct ft_environment* env, enum ft_vm_instruction instruction, int arg)
 {
   const int instructions_bytes = 16;
-  ft_instruction_t instructions[instructions_bytes];
+  ft_instruction_t *instructions = calloc(sizeof(ft_instruction_t), instructions_bytes);
   ft_instruction_t* ip = instructions + instructions_bytes;
   const int arg_shift = CHAR_BIT - ftvmi__bits;
   *--ip = instruction | ((arg & 0xFF) << ftvmi__bits);
@@ -112,6 +112,7 @@ void ft_bb_write_instruction(struct ft_bytecode_builder* bb, struct ft_environme
 
   ft_bb_write_bytes(bb, env, instructions_bytes - (ip - instructions), ip); // instructions + 8 - ip);
   ft_bb_debug(bb);
+  free(instructions);
 }
 
 int ft_bb_pop_instruction(struct ft_bytecode_builder* bb, struct ft_environment* env, enum ft_vm_instruction* instruction, int* arg)
@@ -296,11 +297,12 @@ int ft_bb_add_variable(struct ft_bytecode_builder* bb, struct ft_environment* en
   if(is_mutable)
   {
     int len = strlen(name);
-    char mutator_name[len+2];
+    char *mutator_name = calloc(1, len+2);
     memcpy(mutator_name, name, len);
     mutator_name[len] = ':';
     mutator_name[len+1] = 0;
     ft_bb_add_slot(bb, env, mutator_name, ftvs_setter_slot, ft_environment_intern(env, name));
+    free(mutator_name);
   }
   return result;
 }
@@ -314,11 +316,13 @@ struct ft_string* ft_symbol_as_mutator(struct ft_environment* env, struct ft_str
   if(size && bytes[size - 1] == ':')
     return NULL;
 
-  char new_bytes[size+2];
+  char *new_bytes = calloc(1, size+2);
   memcpy(new_bytes, bytes, size);
   new_bytes[size] = ':';
   new_bytes[size+1] = 0;
-  return ft_environment_intern(env, new_bytes);
+  struct ft_string* symbol = ft_environment_intern(env, new_bytes);
+  free(new_bytes);
+  return symbol;
 }
 
 
